@@ -18,7 +18,7 @@
               <td>{{ symbol }}</td>
               <td>{{ name }}</td>
               <td>{{ price }}</td>
-              <td><a href= "{{ url_for("views.quote", symbol = symbol) }}" class="btn btn-primary"
+              <td><a href= "{{ url_for("transactions.buy", symbol = symbol) }}" class="btn btn-primary"
                      role="button" title="Buy stock">Buy</a>
               </td>
             </tr>

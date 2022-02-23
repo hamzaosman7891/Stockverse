@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Buy Stock{% endblock %}
+
+{% block content %}
+{% if not quoteInfo: %}
+<form action ="/buy" method="GET">
+	<h3 align="center">Buy</h3>
+	<div class="form-group">
+		<label for="symbol">Symbol</label>
+		<input
+		type="text"
+		class="form-control"
+		id="symbol"
+		name="symbol"
+		placeholder="Enter Stock Ticker Symbol"
+		/>
+	</div>
+	<div class="form-group">
+		<label for="shares">Shares</label>
+		<input
+		type="number"
+    min="0"
+		class="form-control"
+		id="shares"
+		name="shares"
+		placeholder="Enter number of shares"
+		/>
+	</div>
+	<br/>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endif %}
+{% if quoteInfo: %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ticker symbol</th>
+      <th>Company's name</th>
+      <th>Latest price, usd</th>
+      <th>Number of shares</th>
+      <th>Cash required</th>
+      <th>Cash available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ quoteInfo["symbol"] }}</td>
+      <td>{{ quoteInfo["name"] }}</td>
+      <td>{{ price | usd }}</td>
+      <td><form action="/buy" method="post">
+            <input type="hidden" name="symbol" value="{{quoteInfo['symbol']}}">
+            <input type="hidden" name="name" value="{{ quoteInfo['name'] }}">
+            <input type="hidden" id="price" name="price" value="{{ quoteInfo['price'] }}">
+            <input autocomplete="off" autofocus class="form-control" id="shares" name="shares"
+                placeholder="number of shares" type="number" value="{{ shares }}" min="0" oninput="calcCash({{ quoteInfo["price"] }},
+                this.value)">
+            <br/>
+            <button class="btn btn-primary" type="submit">Buy</button>
+        </form></td>
+        <td id="required" class="shares">{{ required | usd }}</td>
+        <td>{{ cash | usd }}</td>
+    </tr>
+  </tbody>
+</table>
+
+{% endif %}
+{% endblock %}

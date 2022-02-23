@@ -42,9 +42,13 @@ def create_app():
     
     from .views import views
     from .auth import auth
+    from .transactions import transactions
+    
+    app.jinja_env.filters["usd"] = help.usd
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(transactions, url_prefix='/')
 
     create_database(app)
 

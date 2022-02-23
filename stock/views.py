@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, flash, session, url_for
-from flask_login import login_required, current_user
 from .models import Users, Transactions
 from .help import lookup
 from .help import usd
+from .help import login_required
 
 views = Blueprint('views', __name__)
 
@@ -12,6 +12,7 @@ def home():
 
 
 @views.route("/quote", methods=["GET", "POST"])
+@login_required
 def quote():
     """Get stock quote."""
     # User reached route via POST (as by submitting a form via POST)
@@ -34,4 +35,4 @@ def quote():
         return render_template("quoted.html", symbol = quoteInfo["symbol"], name = quoteInfo["name"], price = usd(quoteInfo["price"]))
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("quote.html", user=current_user)
+        return render_template("quote.html")
