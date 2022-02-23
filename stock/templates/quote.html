@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Quote{% endblock %}
+
+{% block content %}
+<br/>
+<form action="/quote" method="POST">
+	<div class="form-group">
+		<input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock symbol">
+	</div>
+	<button class="btn btn-secondary" type="sumbit">Quote</button>
+</form>
+
+{% endblock %}
