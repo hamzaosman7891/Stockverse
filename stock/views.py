@@ -1,14 +1,18 @@
 from flask import Blueprint, render_template, request, redirect, flash, session, url_for
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func, label
+from . import db
 from .models import Users, Transactions
-from .help import lookup
-from .help import usd
-from .help import login_required
+from .help import lookup, usd, login_required
+
 
 views = Blueprint('views', __name__)
 
 @views.route('/')
+@login_required
 def home():
     return render_template("home.html")
+    
 
 
 @views.route("/quote", methods=["GET", "POST"])
@@ -36,3 +40,4 @@ def quote():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("quote.html")
+
