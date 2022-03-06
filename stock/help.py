@@ -7,7 +7,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func, label
 from sqlalchemy import asc, desc
 from functools import wraps
-from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 
 
 def login_required(f):
@@ -45,10 +44,3 @@ def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
 
-
-
-def errorhandler(e):
-    """Handle error"""
-    if not isinstance(e, HTTPException):
-        e = InternalServerError()
-    return(e.name, e.code)
