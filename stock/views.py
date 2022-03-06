@@ -27,7 +27,7 @@ def home():
     funds = float(fund.cash)
     
     if holdings == []:
-        return render_template("index.html", cash = funds, grand_total = funds,  total = [], shares = [], price = [], symbols = [], holdings_length = 0)
+        return render_template("home.html", cash = funds, total = [], shares = [], price = [], symbols = [], holdings_length = 0)
     
     else:
         # Calculate symbol list length for iteration in index.html

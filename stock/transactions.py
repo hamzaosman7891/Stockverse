@@ -89,7 +89,52 @@ def buy():
 @transactions.route('/history')
 @login_required
 def history():
-    return render_template("history.html")
+    user_id = session.get("user_id")
+    # get suitable order direction SQLAlchemy object based on passed sort_order 
+    
+    holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,Transactions.date,Transactions.number).\
+                                filter(Transactions.user_id == user_id).all()
+
+
+    
+    if holdings == []:
+        return render_template("history.html", date = [], shares = [], price = [], symbols = [], holdings_length = 0)
+    
+    else:
+        # Calculate symbol list length for iteration in index.html
+        holdings_length = len(holdings)
+        print("holdings_length: ", holdings_length)
+        
+        # Create empty arrays to store values
+        symbols = []
+        price = []
+        shares = []
+        date = []
+        # Calculate value of each holding of stock in portfolio
+        for i in range(len(holdings)):
+            symbol_index = holdings[i].symbol
+            print("symbol_index:", symbol_index)
+            symbols.append(symbol_index)
+            # Obtain price of stock using iex API
+
+        for i in range(len(holdings)):
+            price_index = holdings[i].price
+            print("price_index:", price_index)
+            price.append(price_index)
+
+
+        for i in range(len(holdings)):
+            shares_index = holdings[i].number
+            print("shares_index:", shares_index)
+            shares.append(shares_index)
+        
+        for i in range(len(holdings)):
+            date_index = holdings[i].date
+            print("date_index:", date_index)
+            date.append(date_index)
+        # Render page with information
+        return render_template("history.html", holdings = holdings, holdings_length = holdings_length, price = price, shares = shares, date = date)
+
 
 @transactions.route("/sell", methods=["GET", "POST"])
 @login_required
