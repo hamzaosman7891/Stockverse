@@ -100,12 +100,14 @@ def sell():
 
     # request a list of owned shares
     #holdings = db.execute("SELECT symbol, name, SUM(number) shares, SUM(amount) total, (SUM(amount) / SUM(number)) avgprice FROM transactions WHERE user_id = :user_id GROUP BY symbol", user_id = user_id)
+    
     holdings = db.session.query(Transactions.symbol, Transactions.name,
                                 func.sum(Transactions.number).label('shares'),
                                 func.sum(Transactions.amount).label('total'),
-                                label('avgprice', func.sum(Transactions.amount) / func.sum(Transactions.number))).\
-                                filter(Transactions.user_id == user_id).group_by(Transactions.symbol).all()
-
+                                (func.sum(Transactions.amount) / func.sum(Transactions.number)).label('avgprice')).\
+                                filter(Transactions.user_id == user_id).\
+                                group_by(Transactions.symbol).\
+                                having(func.sum(Transactions.number) != 0).all()
     # return base sell page if no url variiables
     if not request.args and request.method == "GET":
 

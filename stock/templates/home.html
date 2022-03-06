@@ -2,5 +2,30 @@
 {% block title %}Stockverse{% endblock %}
 
 {% block content %}
-<h3>Portfolio summary</h3> 
+<div class="container">
+    <h3>Portfolio summary</h3></br>
+    <table class="table table-hover table-md-responsive">
+        <tr class="thead-light">
+            <th scope="col">Stocks Owned</th>
+            <th scope="col">Current Stock Price</th>
+            <th scope="col">Number of Shares</th>
+            <th scope="col">Total Value</th>
+        </tr>
+        {% for i in range(holdings_length) %}
+        <tr>
+            <td>{{ (holdings[i])['symbol'] }}</td>
+            <td>${{ price[i] }}</td>
+            <td>{{ shares[i] }}</td>
+            <td>${{ total[i] }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td><strong>Cash Balance:</strong></td>
+            <td>{{ cash | usd }}</td>
+         </tr>
+    </table>
+</div>
+
 {% endblock %}
