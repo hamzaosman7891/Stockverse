@@ -15,7 +15,7 @@ def home():
     user_id = session.get("user_id")
     # get suitable order direction SQLAlchemy object based on passed sort_order 
 
-    holdings = db.session.query(Transactions.symbol, Transactions.name,
+    holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,
                                 func.sum(Transactions.number).label('shares'),
                                 func.sum(Transactions.amount).label('total'),
                                 (func.sum(Transactions.amount) / func.sum(Transactions.number)).label('avgprice')).\
@@ -32,7 +32,7 @@ def home():
     else:
         # Calculate symbol list length for iteration in index.html
         holdings_length = len(holdings)
-        print("holdings_length: ", holdings_length)
+        #print("holdings_length: ", holdings_length)
         
         # Create empty arrays to store values
         symbols = []
@@ -42,20 +42,20 @@ def home():
         # Calculate value of each holding of stock in portfolio
         for i in range(len(holdings)):
             symbol_index = holdings[i].symbol
-            print("symbol_index:", symbol_index)
+            #print("symbol_index:", symbol_index)
             symbols.append(symbol_index)
             # Obtain price of stock using iex API
-            price_index = float(lookup(symbol_index).get('price'))
-            print("price_index:", price_index)
+           #price_index = float(lookup(symbol_index).get('price'))
+            price_index = holdings[i].price
+            #print("price_index:", price_index)
             price.append(price_index)
-
-            for i in range(len(holdings)):
-                shares_index = holdings[i].shares
-                print("shares_index:", shares_index)
-                shares.append(shares_index)
+            #for i in range(len(holdings)):
+            shares_index = holdings[i].shares
+            #print("shares_index:", shares_index)
+            shares.append(shares_index)
             
             calc = shares_index * price_index
-            print("calc:", calc)
+            #print("calc:", calc)
             total.append(calc)
 
         # Render page with information

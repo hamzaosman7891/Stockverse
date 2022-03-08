@@ -31,15 +31,22 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           {% if session.user_id %}
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/quote">Quote</a>
-          <a class="nav-item nav-link" id="home" href="/buy">Buy</a>
-          <a class="nav-item nav-link" id="home" href="/sell">Sell</a>
-          <a class="nav-item nav-link" id="home" href="/history">History</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <ul class="navbar-nav mr-auto mt-2">
+            <a class="nav-item nav-link" id="home" href="/">Home</a>
+            <a class="nav-item nav-link" id="logout" href="/quote">Quote</a>
+            <a class="nav-item nav-link" id="home" href="/buy">Buy</a>
+            <a class="nav-item nav-link" id="home" href="/sell">Sell</a>
+            <a class="nav-item nav-link" id="home" href="/history">History</a>
+            <a class="nav-item nav-link" id="home" href="/account">Account</a>
+          </ul>
+          <ul class="navbar-nav ml-auto mt-2">
+            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          </ul>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          <ul class="navbar-nav ml-auto mt-2">
+            <a class="nav-item nav-link" id="login" href="/login">Login</a>
+            <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          </ul>
           {% endif %}
         </div>
       </div>
