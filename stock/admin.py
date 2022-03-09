@@ -51,3 +51,41 @@ def account():
     else:
         user = db.session.query(Users.username, Users.cash).filter(Users.id == user_id)
         return render_template("account.html", user = user)
+
+@admin.route("/changefund", methods = ["POST"])
+@login_required
+def changefund():
+    user_id = session.get("user_id")
+
+    if request.method == "POST":
+        operation = request.form.get("cashop")
+        amount = int(request.form.get("amount"))
+
+        if not amount or amount < 0:
+            flash("Please enter amount of cash you would like to add / withdraw a a positive number", category='error')
+            return redirect(url_for('admin.account'))
+
+        current = Users.query.filter(Users.id == user_id).first()
+
+        if operation == "add":
+            new_amount = current.cash + amount
+            current.cash = new_amount
+            db.session.commit()
+            flash("You successfully added funds to your account", category='success')
+            return redirect(url_for('views.home'))
+        
+        if operation == "withdraw":
+            if amount > current.cash:
+                flash("The amount of cash in your account is not enough", category='error')
+                return redirect(url_for('admin.account'))
+            new_amount = current.cash - amount
+
+        current.cash = new_amount
+        db.session.commit()
+
+        flash("You successfully withdrew funds from your account", category='error')
+        return redirect(url_for('views.home'))
+    
+    else:
+        return redirect(url_for('admin.account'))
+
