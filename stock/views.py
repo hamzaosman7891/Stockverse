@@ -114,6 +114,7 @@ def graph():
     else:
         # Calculate symbol list length for iteration in index.html
         holdings_length = len(holdings)
+        #print("holdings_length: ", holdings_length)
         
         # Create empty arrays to store values
         symbols = []
@@ -123,15 +124,20 @@ def graph():
         # Calculate value of each holding of stock in portfolio
         for i in range(len(holdings)):
             symbol_index = holdings[i].symbol
-            symbols.append(symbol_index))
-            
+            #print("symbol_index:", symbol_index)
+            symbols.append(symbol_index)
+            # Obtain price of stock using iex API
+           #price_index = float(lookup(symbol_index).get('price'))
             price_index = holdings[i].price
+            #print("price_index:", price_index)
             price.append(price_index)
-
+            #for i in range(len(holdings)):
             shares_index = holdings[i].shares
+            #print("shares_index:", shares_index)
             shares.append(shares_index)
             
             calc = shares_index * price_index
+            #print("calc:", calc)
             total.append(calc)
 
         # Render page with information
