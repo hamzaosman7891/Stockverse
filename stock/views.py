@@ -89,3 +89,50 @@ def quote():
     else:
         return render_template("quote.html")
 
+
+@views.route("/graph")
+@login_required
+def graph():
+    
+    user_id = session.get("user_id")
+    # get suitable order direction SQLAlchemy object based on passed sort_order 
+    
+    holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,
+                                func.sum(Transactions.number).label('shares'),
+                                func.sum(Transactions.amount).label('total'),
+                                (func.sum(Transactions.amount) / func.sum(Transactions.number)).label('avgprice')).\
+                                filter(Transactions.user_id == user_id).\
+                                group_by(Transactions.symbol).\
+                                having(func.sum(Transactions.number) != 0).all()
+    
+    fund = Users.query.filter(Users.id == user_id).first()
+    funds = float(fund.cash)
+    
+    if holdings == []:
+        return render_template("graph.html", cash = funds, total = [], shares = [], price = [], symbols = [], holdings_length = 0)
+    
+    else:
+        # Calculate symbol list length for iteration in index.html
+        holdings_length = len(holdings)
+        
+        # Create empty arrays to store values
+        symbols = []
+        price = []
+        shares = []
+        total = []
+        # Calculate value of each holding of stock in portfolio
+        for i in range(len(holdings)):
+            symbol_index = holdings[i].symbol
+            symbols.append(symbol_index))
+            
+            price_index = holdings[i].price
+            price.append(price_index)
+
+            shares_index = holdings[i].shares
+            shares.append(shares_index)
+            
+            calc = shares_index * price_index
+            total.append(calc)
+
+        # Render page with information
+        return render_template("graph.html", holdings = holdings, holdings_length = holdings_length, symbols= symbols, price = price, shares=shares,  total = total, cash = funds)
