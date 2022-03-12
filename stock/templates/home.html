@@ -21,11 +21,36 @@
         {% endfor %}
         <tr>
             <td></td>
-            <td></td>
             <td><strong>Cash Balance:</strong></td>
             <td>{{ cash | usd }}</td>
+            <td><button class="btn btn-primary" data-toggle="modal" data-target="#managefund">Funds</button><br></td>
          </tr>
     </table>
 </div>
-
+        <!-- add / withdraw funds dialog -->
+        <div id="managefund" class="modal">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Please enter amount in whole euros and choose action</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <form action="/changefund" method="POST">
+                    <div class="form-group">
+                      <input type="radio" id="add" name="cashop" value="add">
+                      <label for="add">Add funds</label>
+                      <input type="radio" id="withdraw" name="cashop" value="withdraw">
+                      <label for="withdraw">Withdraw funds</label><br>
+                      <input type="number" class="form-control" id="amount" name="amount" placeholder="cash amount, eur" required>
+                      <button class="btn btn-primary" type="submit">Confirm</button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
 {% endblock %}

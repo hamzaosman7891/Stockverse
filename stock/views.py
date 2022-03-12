@@ -71,7 +71,7 @@ def quote():
     if request.method == "POST":
         symbol = request.form.get("symbol")
         
-        # load quore page again if symbol is not provided
+        # load quote page again if symbol is not provided
         if not symbol:
             flash("Please enter stock ticker symbol", category='error')
             return redirect(url_for('views.quote'))
@@ -84,10 +84,10 @@ def quote():
             return redirect(url_for('views.quote'))
         
         # Redirect user to page with stock ticker(-s) info
-        return render_template("quoted.html", symbol = quoteInfo["symbol"], name = quoteInfo["name"], price = usd(quoteInfo["price"]))
+        return render_template("quote.html", symbol = quoteInfo["symbol"], name = quoteInfo["name"], price = usd(quoteInfo["price"]))
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("quote.html")
+        return render_template("quote.html" )
 
 
 @views.route("/graph")
@@ -142,3 +142,41 @@ def graph():
 
         # Render page with information
         return render_template("graph.html", holdings = holdings, holdings_length = holdings_length, symbols= symbols, price = price, shares=shares,  total = total, cash = funds)
+
+
+@views.route("/changefund", methods = ["POST"])
+@login_required
+def changefund():
+    user_id = session.get("user_id")
+
+    if request.method == "POST":
+        operation = request.form.get("cashop")
+        amount = int(request.form.get("amount"))
+
+        if not amount or amount < 0:
+            flash("Please enter amount of cash you would like to add / withdraw a a positive number", category='error')
+            return redirect(url_for('views.home'))
+            
+        current = Users.query.filter(Users.id == user_id).first()
+            
+        if operation == "add":
+            new_amount = current.cash + amount
+            current.cash = new_amount
+            db.session.commit()
+            flash("You successfully added funds to your account", category='success')
+            return redirect(url_for('views.home'))
+            
+        if operation == "withdraw":
+            if amount > current.cash:
+                flash("The amount of cash in your account is not enough", category='error')
+                return redirect(url_for('views.home'))
+            new_amount = current.cash - amount
+            
+            current.cash = new_amount
+            db.session.commit()
+
+        flash("You successfully withdrew funds from your account", category='error')
+        return redirect(url_for('views.home'))
+    
+    else:
+        return redirect(url_for('views.home'))
