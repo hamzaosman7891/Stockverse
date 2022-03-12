@@ -19,6 +19,10 @@
 	  <th>Ticker symbol</th>
 	  <th>Company name</th>
 	  <th>Latest price</th>
+	  <th>Market cap</th>
+	  <th>YTD Change</th>
+	  <th>52WK High</th>
+	  <th>52WK Low</th>
 	  <th>Action</th>
 	</tr>
   </thead>
@@ -28,6 +32,10 @@
 		  <td>{{ symbol }}</td>
 		  <td>{{ name }}</td>
 		  <td>{{ price }}</td>
+		  <td>{{ marketCap }}</td>
+		  <td>{{ YTDChange }}</td>
+		  <td>{{ WK52High }}</td>
+		  <td>{{ WK52Low }}</td>
 		  <td><a href= "{{ url_for('transactions.buy', symbol = symbol) }}" class="btn btn-primary"
 				 role="button" title="Buy stock">Buy</a>
 		  </td>
@@ -35,5 +43,16 @@
 
   </tbody>
 </table>
+
+<h1>Company Name: {{ name }}</h1><br>
+Latest price: {{ price }}<br/>
+Market cap: {{ marketCap }}<br/>
+YTD Change: {{ YTDChange }}<br/>
+52WK High: {{ WK52High }}<br/>
+52WK Low: {{ WK52Low }} <br/>
+<td><a href= "{{ url_for('transactions.buy', symbol = symbol) }}" class="btn btn-primary"
+	role="button" title="Buy stock">Buy</a><br/>
+
+
 {% endif %}
 {% endblock %}

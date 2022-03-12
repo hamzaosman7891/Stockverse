@@ -35,7 +35,11 @@ def lookup(symbol):
         return {
             "name": quote["companyName"],
             "price": float(quote["latestPrice"]),
-            "symbol": quote["symbol"]
+            "symbol": quote["symbol"],
+            "marketCap": float(quote["marketCap"]),
+            "YTDChange": float(quote["ytdChange"]),
+            "WK52High": float(quote["week52High"]),
+            "WK52Low": float(quote["week52Low"])
             }
     except (KeyError, TypeError, ValueError):
         return None
@@ -43,4 +47,3 @@ def lookup(symbol):
 def usd(value):
     """Format value as USD."""
     return f"${value:,.2f}"
-

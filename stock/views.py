@@ -84,7 +84,7 @@ def quote():
             return redirect(url_for('views.quote'))
         
         # Redirect user to page with stock ticker(-s) info
-        return render_template("quote.html", symbol = quoteInfo["symbol"], name = quoteInfo["name"], price = usd(quoteInfo["price"]))
+        return render_template("quote.html", symbol = quoteInfo["symbol"], name = quoteInfo["name"], price = usd(quoteInfo["price"]), marketCap = usd(quoteInfo["marketCap"]), YTDChange = usd(quoteInfo["YTDChange"]), WK52High = usd(quoteInfo["WK52High"]), WK52Low = usd(quoteInfo["WK52Low"]))
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("quote.html" )
