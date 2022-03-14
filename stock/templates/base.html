@@ -32,20 +32,21 @@
         <div class="navbar-nav">
           {% if session.user_id %}
           <ul class="navbar-nav mr-auto mt-2">
-            <a class="nav-item nav-link" id="home" href="/">Stockverse</a>
-            <a class="nav-item nav-link" id="logout" href="/quote">Quote</a>
-            <a class="nav-item nav-link" id="home" href="/buy">Buy</a>
-            <a class="nav-item nav-link" id="home" href="/sell">Sell</a>
-            <a class="nav-item nav-link" id="home" href="/history">History</a>
-            <a class="nav-item nav-link" id="home" href="/graph">Graph</a>
+            <a class="nav-item nav-link" id="home" href="/home">Stockverse</a>
+            <a class="nav-item nav-link" id="logout" href="{{ url_for('views.quote') }}">Quote</a>
+            <a class="nav-item nav-link" id="home" href="{{ url_for('transactions.buy') }}">Buy</a>
+            <a class="nav-item nav-link" id="home" href="{{ url_for('transactions.sell') }}">Sell</a>
+            <a class="nav-item nav-link" id="home" href="{{ url_for('transactions.history') }}">History</a>
+            <a class="nav-item nav-link" id="home" href="{{ url_for('views.graph') }}">Graph</a>
           </ul>
           <ul class="navbar-nav ml-auto mt-2">
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+            <a class="nav-item nav-link" id="logout" href="{{ url_for('auth.logout') }}">Logout</a>
           </ul>
           {% else %}
           <ul class="navbar-nav ml-auto mt-2">
-            <a class="nav-item nav-link" id="login" href="/login">Login</a>
-            <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+            <a class="nav-item nav-link" id="home" href="/">Stockverse</a>
+            <a class="nav-item nav-link" id="login" href="{{ url_for('auth.login') }}">Login</a>
+            <a class="nav-item nav-link" id="signUp" href="{{ url_for('auth.sign_up') }}">Sign Up</a>
           </ul>
           {% endif %}
         </div>

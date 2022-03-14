@@ -9,6 +9,10 @@ from .help import lookup, usd, login_required
 views = Blueprint('views', __name__)
 
 @views.route('/')
+def landing():
+    return render_template("index.html")
+
+@views.route('/home')
 @login_required
 def home():
     
