@@ -5,20 +5,24 @@
 <div class="container">
     <h3>History</h3></br>
     <table class="table table-hover table-md-responsive">
-        <tr class="thead-light">
-        <th scope="col">Stocks Owned</th>
-        <th scope="col">Price</th>
-        <th scope="col">Shares</th>
-        <th scope="col">Date</th>
-    </tr>
-    {% for i in range(holdings_length) %}
-    <tr>
-        <td>{{ (holdings[i])['symbol'] }}</td>
-        <td>${{ price[i] }}</td>
-        <td>{{ shares[i] }}</td>
-        <td>{{ date[i] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+        <thead>
+            <tr class="thead-light">
+                <th scope="col">Stocks Owned</th>
+                <th scope="col">Price</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(holdings_length) %}
+            <tr>
+                <td>{{ (holdings[i])['symbol'] }}</td>
+                <td>${{ price[i] }}</td>
+                <td>{{ shares[i] }}</td>
+                <td>{{ date[i] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

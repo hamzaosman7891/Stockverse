@@ -31,7 +31,7 @@ def home():
     funds = float(fund.cash)
     
     if holdings == []:
-        return render_template("home.html", cash = funds, total = [], shares = [], price = [], symbols = [], holdings_length = 0)
+        return render_template("home.html", cash = funds, total = [], shares = [], avgprice = [], symbols = [], holdings_length = 0)
     
     else:
         # Calculate symbol list length for iteration in index.html
@@ -40,7 +40,7 @@ def home():
         
         # Create empty arrays to store values
         symbols = []
-        price = []
+        avgprice = []
         shares = []
         total = []
         # Calculate value of each holding of stock in portfolio
@@ -50,20 +50,20 @@ def home():
             symbols.append(symbol_index)
             # Obtain price of stock using iex API
            #price_index = float(lookup(symbol_index).get('price'))
-            price_index = holdings[i].price
+            avgprice_index = holdings[i].avgprice
             #print("price_index:", price_index)
-            price.append(price_index)
+            avgprice.append(avgprice_index)
             #for i in range(len(holdings)):
             shares_index = holdings[i].shares
             #print("shares_index:", shares_index)
             shares.append(shares_index)
             
-            calc = shares_index * price_index
+            calc = shares_index * avgprice_index
             #print("calc:", calc)
             total.append(calc)
 
         # Render page with information
-        return render_template("home.html", holdings = holdings, holdings_length = holdings_length, price = price, shares=shares,  total = total, cash = funds)
+        return render_template("home.html", holdings = holdings, holdings_length = holdings_length, avgprice = avgprice, shares=shares,  total = total, cash = funds)
     
 
 

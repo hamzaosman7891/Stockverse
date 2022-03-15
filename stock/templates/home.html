@@ -5,26 +5,30 @@
 <div class="container">
     <h3>Portfolio summary</h3></br>
     <table class="table table-hover table-md-responsive">
+      <thead>
         <tr class="thead-light">
-            <th scope="col">Stocks Owned</th>
-            <th scope="col">Current Stock Price</th>
-            <th scope="col">Number of Shares</th>
-            <th scope="col">Total Value</th>
+          <th scope="col">Stocks Owned</th>
+          <th scope="col">Average Purchase Price</th>
+          <th scope="col">Number of Shares</th>
+          <th scope="col">Total Value</th>
         </tr>
+      </thead>
+      <tbody>
         {% for i in range(holdings_length) %}
         <tr>
-            <td>{{ (holdings[i])['symbol'] }}</td>
-            <td>${{ price[i] }}</td>
-            <td>{{ shares[i] }}</td>
-            <td>${{ total[i] }}</td>
+          <td>{{ (holdings[i])['symbol'] }}</td>
+          <td>{{ avgprice[i] | usd }}</td>
+          <td>{{ shares[i] }}</td>
+          <td>{{ total[i] | usd }}</td>
         </tr>
         {% endfor %}
         <tr>
-            <td></td>
-            <td><strong>Cash Balance:</strong></td>
-            <td>{{ cash | usd }}</td>
-            <td><button class="btn btn-primary" data-toggle="modal" data-target="#managefund">Funds</button><br></td>
+          <td></td>
+          <td><strong>Cash Balance:</strong></td>
+          <td>{{ cash | usd }}</td>
+          <td><button class="btn btn-primary" data-toggle="modal" data-target="#managefund">Funds</button><br></td>
          </tr>
+        </tbody>
     </table>
 </div>
         <!-- add / withdraw funds dialog -->
