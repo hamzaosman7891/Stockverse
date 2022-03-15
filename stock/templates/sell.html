@@ -3,6 +3,7 @@
 
 {% block content %}
 {% if list: %}
+<div class="container">
 <h3>Please choose stock you want to sell</h3>
 <form action="/sell" method="get">
     <select name="symbol" class="custom-select" onchange="this.form.submit()">
@@ -12,25 +13,24 @@
         {% endfor %}
     </select>
 </form>
+</div>
 {% endif %}
 {% if quoteInfo: %}
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Ticker symbol</th>
-      <th>Company's name</th>
-      <th>Shares owned</th>
-      <th>Avg.purchase price</th>
-      <th>Total investment</th>
-      <th>Latest market price</th>
-      <th style="color:red;">Number of shares to be sold</th>
-      <th>Estimated proceeds</th>
-      <th>Estimated P/L</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+<div class="container">
+  <h3>Sell Stock</h3></br>
+  <table class="table table-hover table-md-responsive">
+      <tr class="thead-light">
+      <th scope="col">Ticker Symbol</th>
+      <th scope="col">Company's name</th>
+      <th scope="col">Shares owned</th>
+      <th scope="col">Avg.purchase price</th>
+      <th scope="col">Total investment</th>
+      <th scope="col">Latest market price</th>
+      <th scope="col" style="color:red;">Number of shares to be sold</th>
+      <th scope="col">Estimated proceeds</th>
+      <th scope="col">Estimated P/L</th>
+  </tr>
+  <tr>
       <td>{{ quoteInfo["symbol"] }}</td>
       <td>{{ quoteInfo["name"] }}</td>
       <td>{{ sharesOwned }}</td>
@@ -38,19 +38,19 @@
       <td>{{ amount | usd }}</td>
       <td>{{ quoteInfo["price"] }}</td>
       <td><form action="/sell" method="post">
-            <input type="hidden" name="symbol" value="{{ quoteInfo['symbol'] }}">
-            <input type="hidden" name="price" value="{{ quoteInfo['price'] }}">
-            <input type="hidden" name="name" value="{{ quoteInfo['name'] }}">
-            <input class="form-control" autocomplete="off" autofocus class="form-control" id="shares" name="shares"
-              placeholder="" type="number" min="0" size="16" oninput="calcTrans({{ avgPrice }}, {{ quoteInfo['price'] }},
-              this.value)">
-              <br/>
-            <button class="btn btn-danger" type="submit">Sell</button>
-        </form></td>
+        <input type="hidden" name="symbol" value="{{ quoteInfo['symbol'] }}">
+        <input type="hidden" name="price" value="{{ quoteInfo['price'] }}">
+        <input type="hidden" name="name" value="{{ quoteInfo['name'] }}">
+        <input class="form-control" autocomplete="off" autofocus class="form-control" id="shares" name="shares"
+        placeholder="" type="number" min="0" size="16" oninput="calcTrans({{ avgPrice }}, {{ quoteInfo['price'] }},
+        this.value)">
+        <br/>
+        <button class="btn btn-danger" type="submit">Sell</button>
+      </form></td>
       <td class="currency" id="proceeds"></td>
       <td class="currency shares" id="pl"></td>
-    </tr>
-  </tbody>
+  </tr>
 </table>
+</div>
 {% endif %}
 {% endblock %}
