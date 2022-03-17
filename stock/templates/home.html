@@ -2,8 +2,10 @@
 {% block title %}Stockverse{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h3>Portfolio summary</h3></br>
+<section class="home" id="home">
+  <div class="container">
+  </br>
+    <h3 align="center">Portfolio summary</h3></br>
     <table class="table table-hover table-md-responsive">
       <thead>
         <tr class="thead-light">
@@ -30,13 +32,12 @@
          </tr>
         </tbody>
     </table>
-</div>
         <!-- add / withdraw funds dialog -->
         <div id="managefund" class="modal">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Please enter amount in whole euros and choose action</h4>
+                  <h5 class="modal-title">Enter Amount</h4>
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -46,7 +47,7 @@
                       <label for="add">Add funds</label>
                       <input type="radio" id="withdraw" name="cashop" value="withdraw">
                       <label for="withdraw">Withdraw funds</label><br>
-                      <input type="number" class="form-control" id="amount" name="amount" placeholder="cash amount, eur" required>
+                      <input type="number" class="form-control" id="amount" name="amount" placeholder="cash amount, usd" required>
                       <button class="btn btn-primary" type="submit">Confirm</button>
                     </div>
                   </form>
@@ -57,4 +58,6 @@
               </div>
             </div>
           </div>
+         </div>
+         </section>
 {% endblock %}

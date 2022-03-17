@@ -2,8 +2,10 @@
 {% block title %}Buy Stock{% endblock %}
 
 {% block content %}
+<section class="home" id="home">
+  <div class="container">
 {% if not quoteInfo: %}
-<div class="container">
+</br>
 <form action ="/buy" method="GET">
 	<h3 align="center">Buy</h3>
 	<div class="form-group">
@@ -30,11 +32,10 @@
 	<br/>
 	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
-</div>
 {% endif %}
 {% if quoteInfo: %}
-<div class="container">
-  <h3>Buy Stock</h3></br>
+</br>
+  <h3 align="center">Buy Stock</h3></br>
   <table class="table table-hover table-md-responsive table-responsive">
     <thead>
       <tr class="thead-light">
@@ -66,7 +67,7 @@
       </tr>
     </tbody>
   </table>
-</div>
-
 {% endif %}
+</div>
+</section>
 {% endblock %}

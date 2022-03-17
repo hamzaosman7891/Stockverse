@@ -2,6 +2,8 @@
 {% block title %}Buy Stock{% endblock %}
 
 {% block content %}
+<section class="home" id="home">
+  <div class="container">
 
 <div class="container" align="center">
     <canvas id="myChart" align="center"></canvas>
@@ -70,4 +72,6 @@ const jsArrayTotals = {{ total | tojson }}
       }
     });
   </script>
+ </div>
+ </section>
 {% endblock %}

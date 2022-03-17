@@ -2,20 +2,21 @@
 {% block title %}Quote{% endblock %}
 
 {% block content %}
-{% if not symbol: %}
+<section class="home" id="home">
 <div class="container">
+{% if not symbol: %}
 <br/>
+<h3 align="center">Enter stock quote</h3></br>
 <form action="/quote" method="POST">
 	<div class="form-group">
 		<input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock symbol">
 	</div>
 	<button class="btn btn-secondary" type="sumbit">Quote</button>
 </form>
-</div>
 {% endif %}
 {% if symbol: %}
-<div class="container">
-	<h3>Requested stock ticker information:</h3></br>
+</br>
+	<h3 align="center">Requested stock ticker information:</h3></br>
 	<table class="table table-hover table-md-responsive table-responsive">
 		<thead>
 			<tr class="thead-light">
@@ -44,7 +45,7 @@
 			</tr>
 		</tbody>
 	</table>
-</div>
-
 {% endif %}
+</div>
+</section>
 {% endblock %}

@@ -2,9 +2,11 @@
 {% block title %}Sell Stock{% endblock %}
 
 {% block content %}
-{% if list: %}
+<section class="home" id="home">
 <div class="container">
-<h3>Please choose stock you want to sell</h3>
+{% if list: %}
+</br>
+<h3 align="center">Please choose stock you want to sell</h3></br>
 <form action="/sell" method="get">
     <select name="symbol" class="custom-select" onchange="this.form.submit()">
         <option selected>List of owned stock</option>
@@ -13,11 +15,10 @@
         {% endfor %}
     </select>
 </form>
-</div>
 {% endif %}
 {% if quoteInfo: %}
-<div class="container">
-  <h3>Sell Stock</h3></br>
+</br>
+  <h3 align="center">Sell Stock</h3></br>
   <table class="table table-hover table-md-responsive table-responsive">
       <thead>
           <tr class="thead-light">
@@ -55,6 +56,7 @@
         </tr>
     </tbody>
 </table>
-</div>
 {% endif %}
+</div>
+</section>
 {% endblock %}
