@@ -27,7 +27,7 @@
     crossorigin="anonymous"
     ></script>
 
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="static/style.css">
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 
     <title>{% block title %}Stockverse{% endblock %}</title>
@@ -54,7 +54,7 @@
               </ul>
           {% else %}
               <ul class="navbar-nav mr-auto mt-2">
-                <a class="nav-item nav-link" href="/">Stockverse</a>
+                <a class="nav-item nav-link" href="/">StockVerse</a>
               </ul>
               <ul class="navbar-nav ml-auto mt-2">
                 <a class="nav-item nav-link" id="login" href="{{ url_for('auth.login') }}">Login</a>

@@ -1,16 +1,162 @@
-{% extends "base.html" %}
-{% block title %}Buy Stock{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stockverse</title>
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 
-{% block content %}
-<section class="home" id="home">
-<div class="container">
-    <h3>best mobile app <span>showcase</span></h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus suscipit porro nam libero natus error consequatur sed repudiandae eos quo?</p>
-        <a href="#" class="btn">download now</a>
-    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <div class="image">
-        <img src="static/img/stock.png" alt="">
+    <link rel="stylesheet" href="static/landing.css">
+</head>
+<body>
+
+    <!--Header Section Starts-->
+
+    <header>
+        <a href="/" class="logo">StockVerse</a>
+        <div id="menu-bar" class="fas fa-bars"></div>
+        <nav class="navbar">
+            <a href="{{ url_for('auth.login') }}">Login</a>
+            <a href="{{ url_for('auth.sign_up') }}">Sign up</a>
+        </nav>
+    </header>
+    
+ <!--Header Section Ends-->
+
+  <!--Home Section Starts-->
+  <section class="home" id="home">
+      <div class="content">
+          <h3>Investing Made Simple</h3>
+          <p>  Manage your investments by buying and selling stocks, view your portfolio distribution and gain information on stocks.</p>
+          <a href="{{ url_for('auth.sign_up') }}" class="btn">Get Started</a>
+      </div>
+  
     </div>
+  </section>
+
+   <!--Home Section Ends-->
+
+   <!---Feature section starts-->
+   <section class="features" id="features">
+       <h1 class="heading"> app features</h1>
+
+       <div class="box-container">
+           <div class="box" >
+               <i class="fas fa-magic"></i>
+               <h3>Buy & Sell Stocks</h3>
+               <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+           </div>
+           <div class="box" >
+            <i class="fas fa-magic"></i>
+            <h3>Portfolio Distribution</h3>
+            <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+        </div>
+        <div class="box" >
+            <i class="fas fa-magic"></i>
+            <h3>Data</h3>
+            <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+        </div>
+       </div>
+   </section>
+   <!--Feature section ends-->
+   
+   <!--About section starts-->
+   <section class="about" id="about">
+       <h1 class="heading">About the app</h1></br>
+    
+       <div class="row">
+           
+        <div class="image">
+            <img src="static/img/stock.png" alt="">
+        </div>
+
+       <div class="content">
+           <h3>Website Description</h3>
+           <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+           <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit
+           </p>
+           <div class="buttons">
+            <a href="{{ url_for('auth.sign_up') }}" class="btn">Get Started</a>
+           </div>
+       </div>
+</div>
 </section>
-{% endblock %}
+   <!--About section ends-->
+   
+   <!--Review section starts-->
+   <section class="review" id="review">
+       <h1 class="heading">Testimonals</h1></br>
+    <div class="box-container">
+    <div class="box">
+       <img src="/static/img/stock-icon.png" alt="">
+       <h3>John Doe</h3>
+       <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+       <div class="stars">
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star"></i>
+           <i class="fas fa-star-half-alt"></i>
+       </div>
+    </div>
+    <div class="box">
+        <img src="/static/img/stock-icon.png" alt="">
+        <h3>John Doe</h3>
+        <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+        </div>
+     </div>
+     <div class="box">
+        <img src="/static/img/stock-icon.png" alt="">
+        <h3>John Doe</h3>
+        <p>Lorum ipsum dolor sit amet consecucer adipdlsi elit.Lorum ipsum dolor sit amet consecucer adipdlsi elit.</p>
+        <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+        </div>
+     </div>
+</div>
+   </section>
+   <!--Review section ends-->
+
+   <!--Footer section starts-->
+   <section class="footer">
+        <h1 class="credit">StockVerse, Copyright &copy; 2022 | all rights reserved!
+        </h1>
+   </section>
+   <!--Footer section ends-->
+
+
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+<script>
+let menu = document.querySelector('#menu-bar');
+let mavbar = document.querySelector('.navbar');
+
+menu.addEventListener('click', () =>{
+    menu.classList.toggle('fa-times');
+    navbar.classList.toggle('nav-toggle');
+});
+
+window.onscroll = () =>{
+        menu.classList.remove('fa-times');
+        navbar.classList.remove('nav-toggle');
+    }
+</script>
+</body>
+</html>
