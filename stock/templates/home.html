@@ -5,11 +5,13 @@
 <section class="home" id="home">
   <div class="container">
   </br>
-    <h3 align="center">Portfolio summary</h3></br>
+    <h3 align="center">Portfolio Summary</h3></br>
+    <div class="table mx-auto w-auto">
     <table class="table table-hover table-md-responsive">
       <thead>
         <tr class="thead-light">
           <th scope="col">Stocks Owned</th>
+          <th scope="col">Latest Price</th>
           <th scope="col">Average Purchase Price</th>
           <th scope="col">Number of Shares</th>
           <th scope="col">Total Value</th>
@@ -19,12 +21,14 @@
         {% for i in range(holdings_length) %}
         <tr>
           <td>{{ (holdings[i])['symbol'] }}</td>
+          <td>{{ price[i] | usd }}</td>
           <td>{{ avgprice[i] | usd }}</td>
           <td>{{ shares[i] }}</td>
           <td>{{ total[i] | usd }}</td>
         </tr>
         {% endfor %}
         <tr>
+          <td></td>
           <td></td>
           <td><strong>Cash Balance:</strong></td>
           <td>{{ cash | usd }}</td>
@@ -58,6 +62,7 @@
               </div>
             </div>
           </div>
-         </div>
-         </section>
+        </div>
+      </div>
+    </section>
 {% endblock %}
