@@ -116,7 +116,7 @@ def graph():
     funds = float(fund.cash)
     
     if holdings == []:
-        return render_template("graph.html", cash = funds, total = [], shares = [], price = [], symbols = [], holdings_length = 0)
+        return render_template("graph.html", cash = funds, total = [], shares = [], avgprice = [], price = [], symbols = [], holdings_length = 0)
     
     else:
         # Calculate symbol list length for iteration in index.html
@@ -126,6 +126,7 @@ def graph():
         # Create empty arrays to store values
         symbols = []
         price = []
+        avgprice = []
         shares = []
         total = []
         # Calculate value of each holding of stock in portfolio
@@ -138,17 +139,21 @@ def graph():
             price_index = holdings[i].price
             #print("price_index:", price_index)
             price.append(price_index)
+
+            avgprice_index = holdings[i].avgprice
+            #print("price_index:", price_index)
+            avgprice.append(avgprice_index)
             #for i in range(len(holdings)):
             shares_index = holdings[i].shares
             #print("shares_index:", shares_index)
             shares.append(shares_index)
             
-            calc = shares_index * price_index
+            calc = shares_index * avgprice_index
             #print("calc:", calc)
             total.append(calc)
 
         # Render page with information
-        return render_template("graph.html", holdings = holdings, holdings_length = holdings_length, symbols= symbols, price = price, shares=shares,  total = total, cash = funds)
+        return render_template("graph.html", holdings = holdings, holdings_length = holdings_length, symbols= symbols, price = price, avgprice = avgprice, usd = usd , shares=shares,  total = total, cash = funds)
 
 
 @views.route("/changefund", methods = ["POST"])
