@@ -17,16 +17,24 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         
-        current_user = Users.query.filter_by(username=username).first()
-        if current_user:
-            if check_password_hash(current_user.hash, password):
-                flash('Logged in successfully!', category='success')
-                session["user_id"] = current_user.id
-                return redirect(url_for('views.home'))
-            else:
-                flash('Incorrect password, try again.', category='error')
+        if not username:
+            flash('must provide username', category='error')
+
+        # Ensure password was submitted
+        elif not password:
+            flash('must provide password', category='error')
+
         else:
-            flash('Username does not exist.', category='error')
+            current_user = Users.query.filter_by(username=username).first()
+            if current_user:
+                if check_password_hash(current_user.hash, password):
+                    flash('Logged in successfully!', category='success')
+                    session["user_id"] = current_user.id
+                    return redirect(url_for('views.home'))
+                else:
+                    flash('Incorrect password, try again.', category='error')
+            else:
+                flash('Username does not exist.', category='error')
     return render_template("login.html")
 
 @auth.route('/logout')
@@ -44,7 +52,19 @@ def sign_up():
         password = request.form.get('password')
         confirmation = request.form.get('confirmation')
 
+
         user = Users.query.filter_by(username=username).first()
+
+        if not username:
+            flash('must provide username', category='error')
+
+        # Ensure password was submitted
+        elif not password:
+            flash('must provide password', category='error')
+        
+        elif not confirmation:
+            flash('must provide password confirmation', category='error')
+
         if user:
             flash('username already exists.', category='error')
         
@@ -56,6 +76,7 @@ def sign_up():
 
         elif len(password) < 7:
             flash('Password must be at least 7 characters.', category='error')
+
         
         else:
             # Insert username in database
