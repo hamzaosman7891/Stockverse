@@ -60,4 +60,3 @@ def create_database(app):
 		print('Creates Database!')
 
 
-

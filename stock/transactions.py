@@ -22,6 +22,8 @@ def buy():
     if not shares:
         shares = 0
 
+
+    
     if int(shares) < 0:
         flash('Please enter positive number of shares to buy.', category='error')
         return redirect(url_for('transactions.buy'))
@@ -86,8 +88,7 @@ def buy():
 @transactions.route('/history')
 @login_required
 def history():
-    user_id = session.get("user_id")
-    # get suitable order direction SQLAlchemy object based on passed sort_order 
+    user_id = session.get("user_id") 
     
     holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,Transactions.date,Transactions.number).\
                                 filter(Transactions.user_id == user_id).all()
@@ -98,7 +99,7 @@ def history():
         return render_template("history.html", date = [], shares = [], price = [], symbols = [], holdings_length = 0)
     
     else:
-        # Calculate symbol list length for iteration in index.html
+        # Calculate symbol list length for iteration
         holdings_length = len(holdings)
         #print("holdings_length: ", holdings_length)
         
@@ -140,6 +141,7 @@ def sell():
 
     user_id = session.get("user_id")
 
+    # request a list of owned shares
     
     holdings = db.session.query(Transactions.symbol, Transactions.name,
                                 func.sum(Transactions.number).label('shares'),
@@ -207,6 +209,7 @@ def sell():
             # prepare data to be inserted into db
             amount = round(int(shares) * price, 2) * -1
 
+            
             funds =  Users.query.filter(Users.id == user_id).first()
             cash_after = float(funds.cash) - amount
 

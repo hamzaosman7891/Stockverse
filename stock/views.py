@@ -16,8 +16,7 @@ def landing():
 @login_required
 def home():
     
-    user_id = session.get("user_id")
-    # get suitable order direction SQLAlchemy object based on passed sort_order 
+    user_id = session.get("user_id") 
 
     holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,
                                 func.sum(Transactions.number).label('shares'),
@@ -34,7 +33,7 @@ def home():
         return render_template("home.html", cash = funds, total = [], shares = [], price = [], avgprice = [], symbols = [], holdings_length = 0)
     
     else:
-        # Calculate symbol list length for iteration in index.html
+        # Calculate symbol list length for iteration
         holdings_length = len(holdings)
         #print("holdings_length: ", holdings_length)
         
@@ -102,7 +101,7 @@ def quote():
 def graph():
     
     user_id = session.get("user_id")
-    # get suitable order direction SQLAlchemy object based on passed sort_order 
+    
     
     holdings = db.session.query(Transactions.symbol, Transactions.name,Transactions.price,
                                 func.sum(Transactions.number).label('shares'),
@@ -119,7 +118,7 @@ def graph():
         return render_template("graph.html", cash = funds, total = [], shares = [], avgprice = [], price = [], symbols = [], holdings_length = 0)
     
     else:
-        # Calculate symbol list length for iteration in index.html
+        # Calculate symbol list length for iteration
         holdings_length = len(holdings)
         #print("holdings_length: ", holdings_length)
         
