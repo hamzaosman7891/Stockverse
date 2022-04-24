@@ -21,10 +21,7 @@ def buy():
 
     if not shares:
         shares = 0
-        #flash('Please enter a number of shares to buy.', category='error')
-        #return redirect(url_for('transactions.buy'))
 
-    
     if int(shares) < 0:
         flash('Please enter positive number of shares to buy.', category='error')
         return redirect(url_for('transactions.buy'))
@@ -143,8 +140,6 @@ def sell():
 
     user_id = session.get("user_id")
 
-    # request a list of owned shares
-    #holdings = db.execute("SELECT symbol, name, SUM(number) shares, SUM(amount) total, (SUM(amount) / SUM(number)) avgprice FROM transactions WHERE user_id = :user_id GROUP BY symbol", user_id = user_id)
     
     holdings = db.session.query(Transactions.symbol, Transactions.name,
                                 func.sum(Transactions.number).label('shares'),
@@ -212,7 +207,6 @@ def sell():
             # prepare data to be inserted into db
             amount = round(int(shares) * price, 2) * -1
 
-            #funds = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id = user_id)
             funds =  Users.query.filter(Users.id == user_id).first()
             cash_after = float(funds.cash) - amount
 

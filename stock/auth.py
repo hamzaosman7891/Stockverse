@@ -87,7 +87,6 @@ def sign_up():
             db.session.flush()
                 
             # log newly registered user in
-            #id = db.session.query(Users.id).filter(Users.username == username).first()
             session["user_id"] = new_user.id
             
             # finalize changes to database

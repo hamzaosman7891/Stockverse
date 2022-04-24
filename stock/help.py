@@ -5,7 +5,6 @@ import urllib.parse
 from flask import redirect, render_template, request, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func, label
-from sqlalchemy import asc, desc
 from functools import wraps
 
 

@@ -59,9 +59,5 @@ def create_database(app):
 		db.create_all(app=app)
 		print('Creates Database!')
 
-#api_key = os.getenv("API_KEY")
 
-# Make sure API key is set
-#if not os.environ.get("API_KEY"):
-    #raise RuntimeError("API_KEY not set")
 

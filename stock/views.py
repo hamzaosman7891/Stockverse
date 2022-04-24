@@ -166,7 +166,7 @@ def changefund():
         amount = int(request.form.get("amount"))
 
         if not amount or amount < 0:
-            flash("Please enter amount of cash you would like to add / withdraw a a positive number", category='error')
+            flash("Please enter amount of cash you would like to add / withdraw as a positive number", category='error')
             return redirect(url_for('views.home'))
             
         current = Users.query.filter(Users.id == user_id).first()

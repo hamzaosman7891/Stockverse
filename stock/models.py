@@ -4,8 +4,6 @@ from sqlalchemy import text
 from datetime import datetime
 
 
-
-# map tables to classes
 class Users(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -22,6 +20,6 @@ class Transactions(db.Model):
     number = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.TIMESTAMP, nullable=False, default=text('CURRENT_TIMESTAMP')) # datetime.utcnow)
+    date = db.Column(db.TIMESTAMP, nullable=False, default=text('CURRENT_TIMESTAMP'))
     type = db.Column(db.String(4), nullable=False)
     users = db.relationship('Users', backref=db.backref('transactions', lazy=True))

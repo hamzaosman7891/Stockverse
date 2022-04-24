@@ -20,3 +20,5 @@ function calcCash(price, shares){
     document.getElementById("required").innerHTML = required.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
     negativeNumbers();
 }
+
+
