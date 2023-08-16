@@ -17,13 +17,6 @@ investment, many people have started to invest and improve on their financial li
 Therefore, producing a portfolio management web application will aid these people in their
 investment journey.
 
-## Installation
-
-Download Python
-```bash
-Pip install -r requirements.txt
-Flask Run
-```
 
 ## Tech Stack
 
